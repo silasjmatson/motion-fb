@@ -20,10 +20,10 @@ Motion::Project::App.setup do |app|
   # ...
 
   # Pod keys correspond to their cocoapod
-  # :core 'FBSDKCoreKit',
-  # :login 'FBSDKLoginKit',
-  # :messenger 'FBSDKMessengerShareKit',
-  # :share 'FBSDKShareKit',
+  # :core        'FBSDKCoreKit',
+  # :login       'FBSDKLoginKit',
+  # :messenger   'FBSDKMessengerShareKit',
+  # :share       'FBSDKShareKit',
   app.facebook(app_id: "MYAPPID", display_name: "MYDISPLAY_NAME", pods: [:login, :core, :share, :messenger])
 end
 ```

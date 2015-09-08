@@ -8,8 +8,8 @@ module Motion::Project
     def facebook(opts = {})
       set_up_cf_bundle_url_types(opts[:app_id])
 
-      app.info_plist["FacebookAppID"] = opts[:app_id]
-      app.info_plist["FacebookDisplayName"] = opts[:display_name]
+      self.info_plist["FacebookAppID"] = opts[:app_id]
+      self.info_plist["FacebookDisplayName"] = opts[:display_name]
 
       set_up_whitelist
 
@@ -20,8 +20,8 @@ module Motion::Project
 
     def set_up_whitelist
       # Whitelist for iOS 9
-      app.info_plist["NSAppTransportSecurity"] ||= {}
-      app.info_plist["NSAppTransportSecurity"].merge!({
+      self.info_plist["NSAppTransportSecurity"] ||= {}
+      self.info_plist["NSAppTransportSecurity"].merge!({
         "NSExceptionDomains" => {
           "facebook.com" => { "NSIncludesSubdomains" => true, "NSExceptionRequiresForwardSecrecy" => false },
           "fbcdn.net" => { "NSIncludesSubdomains" => true, "NSExceptionRequiresForwardSecrecy" => false },
@@ -31,20 +31,20 @@ module Motion::Project
     end
 
     def set_up_cf_bundle_url_types(app_id)
-      app.info_plist["CFBundleURLTypes"] ||= []
+      self.info_plist["CFBundleURLTypes"] ||= []
 
       found = false
-      app.info_plist["CFBundleURLTypes"].each do |hash|
+      self.info_plist["CFBundleURLTypes"].each do |hash|
         if hash["CFBundleURLSchemes"] && hash["CFBundleURLSchemes"].is_a?(Array)
           hash["CFBundleURLSchemes"] << "fb#{app_id}"
-          hash["CFBundleURLName"] ||= app.identifier
+          hash["CFBundleURLName"] ||= self.identifier
           found = true
         end
       end
 
       unless found
-        app.info_plist["CFBundleURLTypes"] << {
-          "CFBundleURLName" => app.identifier,
+        self.info_plist["CFBundleURLTypes"] << {
+          "CFBundleURLName" => self.identifier,
           "CFBundleURLSchemes" => [ "convocode", "fb#{app_id}" ]
         }
       end
@@ -70,7 +70,7 @@ module Motion::Project
         }
       }
 
-      app.pods do
+      self.pods do
         possible_pods.each do |key, data|
           if fb_pods.include?(key)
             pod data[:pod], data[:version]
