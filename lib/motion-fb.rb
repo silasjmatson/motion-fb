@@ -45,7 +45,7 @@ module Motion::Project
       unless found
         self.info_plist["CFBundleURLTypes"] << {
           "CFBundleURLName" => self.identifier,
-          "CFBundleURLSchemes" => [ "convocode", "fb#{app_id}" ]
+          "CFBundleURLSchemes" => [ "fb#{app_id}" ]
         }
       end
     end
