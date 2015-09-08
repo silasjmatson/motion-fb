@@ -30,6 +30,12 @@ end
 
 **Note:** Be sure to run `rake pod:install` to install the cocoapods
 
+## What this does
+
+* Sets up all the info.plist stuff
+* Sets up URL Schemes
+* Sets up the required CocoaPods
+
 ## Contributing
 
 1. Fork it
