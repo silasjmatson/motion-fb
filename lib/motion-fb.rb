@@ -53,11 +53,11 @@ module Motion::Project
       possible_pods = {
         core: {
           pod: 'FBSDKCoreKit',
-          version: '~> 4.5.0'
+          version: '~> 4.6.0'
         },
         login: {
           pod: 'FBSDKLoginKit',
-          version: '~> 4.5.0'
+          version: '~> 4.6.0'
         },
         messenger: {
           pod: 'FBSDKMessengerShareKit',
@@ -65,7 +65,7 @@ module Motion::Project
         },
         share: {
           pod: 'FBSDKShareKit',
-          version: '~> 4.5.0'
+          version: '~> 4.6.0'
         }
       }
 
