@@ -12,6 +12,7 @@ module Motion::Project
       self.info_plist["FacebookDisplayName"] = opts[:display_name]
 
       set_up_whitelist
+      set_up_application_query_schemes
 
       add_fb_pods(opts[:pods])
     end
@@ -27,6 +28,13 @@ module Motion::Project
         "fbcdn.net" => { "NSIncludesSubdomains" => true, "NSExceptionRequiresForwardSecrecy" => false },
         "akamaihd.net" => { "NSIncludesSubdomains" => true, "NSExceptionRequiresForwardSecrecy" => false },
       })
+    end
+
+    def set_up_application_query_schemes
+      self.info_plist["LSApplicationQueriesSchemes"] ||= []
+      [ "fbapi", "fbapi20130214", "fbapi20130410", "fbapi20130702", "fbapi20131010", "fbapi20131219", "fbapi20140410", "fbapi20140116", "fbapi20150313", "fbapi20150629", "fbauth", "fbauth2", "fb-messenger-api20140430" ].each do |scheme|
+        self.info_plist["LSApplicationQueriesSchemes"] << scheme
+      end
     end
 
     def set_up_cf_bundle_url_types(app_id)
