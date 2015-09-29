@@ -21,12 +21,11 @@ module Motion::Project
     def set_up_whitelist
       # Whitelist for iOS 9
       self.info_plist["NSAppTransportSecurity"] ||= {}
-      self.info_plist["NSAppTransportSecurity"].merge!({
-        "NSExceptionDomains" => {
-          "facebook.com" => { "NSIncludesSubdomains" => true, "NSExceptionRequiresForwardSecrecy" => false },
-          "fbcdn.net" => { "NSIncludesSubdomains" => true, "NSExceptionRequiresForwardSecrecy" => false },
-          "akamaihd.net" => { "NSIncludesSubdomains" => true, "NSExceptionRequiresForwardSecrecy" => false },
-        }
+      self.info_plist["NSAppTransportSecurity"]["NSExceptionDomains"] ||= {}
+      self.info_plist["NSAppTransportSecurity"]["NSExceptionDomains"].merge!({
+        "facebook.com" => { "NSIncludesSubdomains" => true, "NSExceptionRequiresForwardSecrecy" => false },
+        "fbcdn.net" => { "NSIncludesSubdomains" => true, "NSExceptionRequiresForwardSecrecy" => false },
+        "akamaihd.net" => { "NSIncludesSubdomains" => true, "NSExceptionRequiresForwardSecrecy" => false },
       })
     end
 
